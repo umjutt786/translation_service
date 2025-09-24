@@ -15,6 +15,24 @@ class TranslationController extends Controller
 {
 
     /**
+     * @OA\Info(
+     *     title="Laravel Translation API",
+     *     version="1.0.0",
+     *     description="API for managing translations",
+     *     @OA\Contact(
+     *         email="support@example.com"
+     *     ),
+     *     @OA\License(
+     *         name="Apache 2.0",
+     *         url="http://www.apache.org/licenses/LICENSE-2.0.html"
+     *     )
+     * )
+     *
+     * @OA\Server(
+     *     url="http://localhost:9000",
+     *     description="Local development server"
+     * )
+     *
      * @OA\Tag(
      *     name="Translations",
      *     description="API Endpoints for Translation Management"
@@ -29,36 +47,22 @@ class TranslationController extends Controller
      * @OA\Get(
      *     path="/api/translations",
      *     tags={"Translations"},
-     *     summary="List translations",
-     *     description="Retrieve translations filtered by locale, key, or tag",
-     *     security={{"sanctum":{}}},
+     *     security={{"sanctum": {}}},
      *     @OA\Parameter(
      *         name="locale",
      *         in="query",
-     *         description="Locale code (en, fr, es)",
-     *         required=false,
-     *         @OA\Schema(type="string")
-     *     ),
-     *     @OA\Parameter(
-     *         name="key",
-     *         in="query",
-     *         description="Translation key",
-     *         required=false,
-     *         @OA\Schema(type="string")
-     *     ),
-     *     @OA\Parameter(
-     *         name="tag",
-     *         in="query",
-     *         description="Translation tag",
-     *         required=false,
+     *         description="Locale for filtering translations",
      *         @OA\Schema(type="string")
      *     ),
      *     @OA\Response(
      *         response=200,
      *         description="List of translations",
-     *         @OA\JsonContent(type="array", @OA\Items(type="object"))
+     *         @OA\JsonContent()
      *     ),
-     *     @OA\Response(response=401, description="Unauthorized")
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthenticated"
+     *     )
      * )
      */
 

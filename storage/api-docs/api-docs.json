@@ -1,0 +1,264 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Laravel Translation API",
+        "description": "API for managing translations",
+        "contact": {
+            "email": "support@example.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:9000",
+            "description": "Local development server"
+        }
+    ],
+    "paths": {
+        "/api/translations": {
+            "get": {
+                "tags": [
+                    "Translations"
+                ],
+                "operationId": "03e0745fb3bed90fe04f46a1395fa4c1",
+                "parameters": [
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "Locale for filtering translations",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of translations",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Translations"
+                ],
+                "summary": "Create a new translation",
+                "description": "Store a new translation in the database",
+                "operationId": "711dfe2c7f0dbd38f67d0f3e7e07f5b5",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "locale",
+                                    "key",
+                                    "value",
+                                    "tag"
+                                ],
+                                "properties": {
+                                    "locale": {
+                                        "type": "string",
+                                        "example": "en"
+                                    },
+                                    "key": {
+                                        "type": "string",
+                                        "example": "welcome_message"
+                                    },
+                                    "value": {
+                                        "type": "string",
+                                        "example": "Welcome to our site"
+                                    },
+                                    "tag": {
+                                        "type": "string",
+                                        "example": "web"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Translation created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/translations/{id}": {
+            "put": {
+                "tags": [
+                    "Translations"
+                ],
+                "summary": "Update a translation",
+                "description": "Update an existing translation by ID",
+                "operationId": "a5cb050be20f56c1ce385df0166adef0",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Translation ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "locale": {
+                                        "type": "string",
+                                        "example": "en"
+                                    },
+                                    "key": {
+                                        "type": "string",
+                                        "example": "welcome_message"
+                                    },
+                                    "value": {
+                                        "type": "string",
+                                        "example": "Welcome to our site"
+                                    },
+                                    "tag": {
+                                        "type": "string",
+                                        "example": "web"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Translation updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/translations/export/{locale}": {
+            "get": {
+                "tags": [
+                    "Translations"
+                ],
+                "summary": "Export translations for a given locale",
+                "description": "Return all translations for a given locale as a JSON object",
+                "operationId": "05db55fb9effa725480e9e27d661ae67",
+                "parameters": [
+                    {
+                        "name": "locale",
+                        "in": "path",
+                        "description": "Locale code (en, fr, es)",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Translations exported successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "welcome_message": "Welcome to our site"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Translations",
+            "description": "API Endpoints for Translation Management"
+        }
+    ],
+    "components": {
+        "securitySchemes": {
+            "sanctum": {
+                "type": "apiKey",
+                "description": "Enter token in format (Bearer <token>)",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    },
+    "security": [
+        {
+            "sanctum": []
+        }
+    ]
+}

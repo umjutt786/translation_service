@@ -81,7 +81,7 @@ SANCTUM_STATEFUL_DOMAINS=localhost
 ### 4. Install Dependencies
 
 ```bash
-docker exec -it translation-service_app composer install
+docker exec -it laravel_translation_service composer install
 ```
 
 ---
@@ -89,14 +89,14 @@ docker exec -it translation-service_app composer install
 ### 5. Run Migrations & Seed Database
 
 ```bash
-docker exec -it translation-service_app php artisan migrate
-docker exec -it translation-service_app php artisan db:seed
+docker exec -it laravel_translation_service php artisan migrate
+docker exec -it laravel_translation_service php artisan db:seed
 ```
 
 You can also seed **100,000 translations** for testing:
 
 ```bash
-docker exec -it translation-service_app php artisan tinker
+docker exec -it laravel_translation_service php artisan tinker
 \App\Models\Translation::factory()->count(100000)->create();
 ```
 
@@ -105,7 +105,7 @@ docker exec -it translation-service_app php artisan tinker
 ### 6. Generate Swagger Documentation
 
 ```bash
-docker exec -it translation-service_app php artisan l5-swagger:generate
+docker exec -it laravel_translation_service php artisan l5-swagger:generate
 ```
 
 Access API docs at:
@@ -149,7 +149,7 @@ Uses Laravel Sanctum for token-based authentication.
 
 Generate a token for a user:
 ```bash
-docker exec -it translation-service_app php artisan tinker
+docker exec -it laravel_translation_service php artisan tinker
 $user = \App\Models\User::factory()->create(['email' => 'test@example.com', 'password' => bcrypt('password')]);
 $token = $user->createToken('api-token')->plainTextToken;
 ```
@@ -178,12 +178,12 @@ Here you can test API endpoints directly.
 
 Run all tests:
 ```bash
-docker exec -it translation-service_app php artisan test
+docker exec -it laravel_translation_service php artisan test
 ```
 
 Run a specific test:
 ```bash
-docker exec -it translation-service_app php artisan test --filter=TranslationExportTest
+docker exec -it laravel_translation_service php artisan test --filter=TranslationExportTest
 ```
 
 ---
