@@ -34,7 +34,7 @@ It includes **token-based authentication**, **Swagger documentation**, and **Doc
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/translation-service.git
+git clone https://github.com/umjutt786/translation-service.git
 cd translation-service
 ```
 
